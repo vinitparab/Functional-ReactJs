@@ -6,7 +6,7 @@ import NewTask from './components/others/NewTask'
 import {getLocalStorage, setLocalStorage} from './utils/localStorage'
 import { AuthContext } from './context/AuthProvider'
 
-const App = () => {
+const App = (props) => {
  const [user, setUser] = useState(null)
  const [loggedInUser, setLoggedInUser] = useState(null)
   const authdata = useContext(AuthContext)
@@ -42,9 +42,9 @@ const App = () => {
   return (
     <>
     { !user ? <Login handleLogin={handleLogin}/>: ''}
-    {user=='admin'?<AdminDashboard/>:(user == 'employee' ? <EmployeeDashboard data={loggedInUser}/>:null)}
+    {user=='admin'?<AdminDashboard changeUser={setUser}/>:(user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUser}/>:null)}
     </>
   )
 }
 
-export default App
+export default App  
